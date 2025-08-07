@@ -70,7 +70,15 @@ end;
 procedure TForm1.CompraClick(Sender: TObject);
 begin
   varnome := inputbox('nome','digite seu nome','');
-  msg.caption := 'Parabéns ' + varnome + 'você comprou ' + editDolar.text + ' dolar(es)';
+
+  if (varnome <> '') and (EditDolar.text <> '0') then
+   begin
+     msg.caption := 'Parabéns ' + varnome + 'você comprou ' + editDolar.text + ' dolar(es)';
+   end
+  else
+  begin
+     showmessage('falta nome ou adquirir dolar');
+  end;
 end;
 
 procedure TForm1.EditDolarChange(Sender: TObject);
