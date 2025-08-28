@@ -1,100 +1,47 @@
 unit Unit1;
 
-{$mode objfpc}{$H+}
-
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls,
+  Vcl.DBCtrls, Vcl.Buttons, Data.DB, Vcl.Grids, Vcl.DBGrids;
 
 type
-
-  { TForm1 }
-
   TForm1 = class(TForm)
-    Button1: TButton;
-    Compra: TButton;
-    msg: TLabel;
-    reall: TLabel;
-    EditDolar: TEdit;
-    EditReal: TEdit;
-    Dolar: TLabel;
-    procedure Button1Click(Sender: TObject);
-    procedure CompraClick(Sender: TObject);
-    procedure EditDolarChange(Sender: TObject);
-    procedure EditRealChange(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure boxClick(Sender: TObject);
-    procedure DolarClick(Sender: TObject);
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBCheckBox1: TDBCheckBox;
+    DBMemo1: TDBMemo;
+    Label4: TLabel;
+    Label5: TLabel;
+    DBText1: TDBText;
+    DBNavigator1: TDBNavigator;
+    txtBusca: TEdit;
+    Label6: TLabel;
+    DBGrid1: TDBGrid;
+    procedure txtBuscaChange(Sender: TObject);
   private
-
+    { Private declarations }
   public
-
+    { Public declarations }
   end;
 
 var
   Form1: TForm1;
-  varreal : real;
-  varnome : string;
 
 implementation
 
-{$R *.lfm}
+{$R *.dfm}
 
-{ TForm1 }
+uses UnitDm;
 
-procedure TForm1.boxClick(Sender: TObject);
+procedure TForm1.txtBuscaChange(Sender: TObject);
 begin
-
-end;
-
-procedure TForm1.DolarClick(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.Button1Click(Sender: TObject);
-begin
-     if EditDolar.text = '' then
-      begin
-         showmessage('Digite o valor em dolar');
-      end
-     else
-      begin
-         Compra.enabled := true;
-         varreal := strtofloat(EditDolar.text) * 3.9;
-         EditReal.text := floattostr(varreal);
-      end;
-end;
-
-procedure TForm1.CompraClick(Sender: TObject);
-begin
-  varnome := inputbox('nome','digite seu nome','');
-
-  if (varnome <> '') and (EditDolar.text <> '0') then
-   begin
-     msg.caption := 'Parabéns ' + varnome + 'você comprou ' + editDolar.text + ' dolar(es)';
-   end
-  else
-  begin
-     showmessage('falta nome ou adquirir dolar');
-  end;
-end;
-
-procedure TForm1.EditDolarChange(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.EditRealChange(Sender: TObject);
-begin
-
-end;
-
-procedure TForm1.FormCreate(Sender: TObject);
-begin
-
+  Dm.tbContatos.locate('nome',txtBusca.Text, [loPartialKey]);
 end;
 
 end.
-
